@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.baseproject.dao.InsuranceResponsibleMapper">
+  <resultMap id="BaseResultMap" type="com.centerm.baseproject.domain.InsuranceResponsible">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="master_project_id" jdbcType="VARCHAR" property="masterProjectId" />
+    <result column="insurance_code" jdbcType="INTEGER" property="insuranceCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="premium_factor" jdbcType="DECIMAL" property="premiumFactor" />
+
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="responsible_type" jdbcType="VARCHAR" property="responsibleType" />
+
+  </resultMap>
+
+  <select id="selectByInsuranceCode" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, insurance_code, `name`, premium_factor, description,
+    responsible_type
+    from insurance_responsible WHERE insurance_code = #{insuranceCode}
+  </select>
+</mapper>

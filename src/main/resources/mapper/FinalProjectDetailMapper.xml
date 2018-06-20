@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.baseproject.dao.FinalProjectDetailMapper">
+  <resultMap id="BaseResultMap" type="com.centerm.baseproject.domain.FinalProjectDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="master_project_id" jdbcType="VARCHAR" property="masterProjectId" />
+    <result column="insurance_code" jdbcType="INTEGER" property="insuranceCode" />
+    <result column="insurance_coverage" jdbcType="DECIMAL" property="insuranceCoverage" />
+    <result column="first_year_premium" jdbcType="DECIMAL" property="firstYearPremium" />
+
+    <result column="pay_span" jdbcType="VARCHAR" property="paySpan" />
+    <result column="insurance_span" jdbcType="VARCHAR" property="insuranceSpan" />
+
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from final_project_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.centerm.baseproject.domain.FinalProjectDetail">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into final_project_detail (master_project_id, insurance_code, insurance_coverage,
+      first_year_premium, pay_span, insurance_span
+      )
+    values (#{masterProjectId,jdbcType=VARCHAR}, #{insuranceCode,jdbcType=INTEGER}, #{insuranceCoverage,jdbcType=DECIMAL},
+      #{firstYearPremium,jdbcType=DECIMAL}, #{paySpan,jdbcType=VARCHAR}, #{insuranceSpan,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.centerm.baseproject.domain.FinalProjectDetail">
+    update final_project_detail
+    set master_project_id = #{masterProjectId,jdbcType=VARCHAR},
+      insurance_code = #{insuranceCode,jdbcType=INTEGER},
+      insurance_coverage = #{insuranceCoverage,jdbcType=DECIMAL},
+      first_year_premium = #{firstYearPremium,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, master_project_id, insurance_code, insurance_coverage, first_year_premium,
+    create_time, update_time
+    from final_project_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, master_project_id, insurance_code, insurance_coverage, first_year_premium,
+    create_time, update_time
+    from final_project_detail
+  </select>
+
+  <select id="selectByInsuranceCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, master_project_id, insurance_code, insurance_coverage, first_year_premium,
+    pay_span, insurance_span
+    from final_project_detail WHERE master_project_id = #{id}
+  </select>
+</mapper>

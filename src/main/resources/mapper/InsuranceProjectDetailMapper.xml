@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.baseproject.dao.InsuranceProjectDetailMapper">
+  <resultMap id="BaseResultMap" type="com.centerm.baseproject.domain.InsuranceProjectDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="master_project_id" jdbcType="INTEGER" property="masterProjectId" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="insurance_code" jdbcType="INTEGER" property="insuranceCode" />
+    <result column="insurance_coverage" jdbcType="DECIMAL" property="insuranceCoverage" />
+    <result column="is_necessary" jdbcType="INTEGER" property="isNecessary" />
+    <result column="is_selected" jdbcType="INTEGER" property="isSelected" />
+    <result column="first_year_premium" jdbcType="DECIMAL" property="firstYearPremium" />
+    <result column="pay_span" jdbcType="INTEGER" property="paySpan" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from insurance_project_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.centerm.baseproject.domain.InsuranceProjectDetail">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into insurance_project_detail (master_project_id, insurance_id, insurance_coverage, 
+      is_necessary, first_year_premium, pay_span, 
+      create_time, update_time)
+    values (#{masterProjectId,jdbcType=INTEGER}, #{insuranceId,jdbcType=INTEGER}, #{insuranceCoverage,jdbcType=DECIMAL}, 
+      #{isNecessary,jdbcType=INTEGER}, #{firstYearPremium,jdbcType=DECIMAL}, #{paySpan,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.centerm.baseproject.domain.InsuranceProjectDetail">
+    update insurance_project_detail
+    set master_project_id = #{masterProjectId,jdbcType=INTEGER},
+      insurance_id = #{insuranceId,jdbcType=INTEGER},
+      insurance_coverage = #{insuranceCoverage,jdbcType=DECIMAL},
+      is_necessary = #{isNecessary,jdbcType=INTEGER},
+      first_year_premium = #{firstYearPremium,jdbcType=DECIMAL},
+      pay_span = #{paySpan,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, master_project_id, insurance_id, insurance_coverage, is_necessary, first_year_premium, 
+    pay_span, create_time, update_time
+    from insurance_project_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, master_project_id, insurance_id, insurance_coverage, is_necessary, first_year_premium, 
+    pay_span, create_time, update_time
+    from insurance_project_detail
+  </select>
+
+  <select id="selectByMasterId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, master_project_id,p_id,insurance_code, insurance_coverage, is_necessary, is_selected,first_year_premium,
+    pay_span, create_time, update_time
+    from insurance_project_detail
+    where master_project_id = #{masterId,jdbcType=INTEGER}
+  </select>
+
+</mapper>

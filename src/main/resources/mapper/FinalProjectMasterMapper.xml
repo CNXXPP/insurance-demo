@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.baseproject.dao.FinalProjectMasterMapper">
+
+  <resultMap id="BaseResultMap" type="com.centerm.baseproject.domain.FinalProjectMaster">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="holder_name" jdbcType="VARCHAR" property="holderName" />
+    <result column="holder_gender" jdbcType="INTEGER" property="holderGender" />
+    <result column="holder_age" jdbcType="INTEGER" property="holderAge" />
+    <result column="holder_birthday" jdbcType="VARCHAR" property="holderBirthday" />
+    <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+    <result column="receiver_gender" jdbcType="INTEGER" property="receiverGender" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="pay_span" jdbcType="VARCHAR" property="paySpan" />
+    <result column="insurance_span" jdbcType="VARCHAR" property="insuranceSpan" />
+    <result column="first_year_premium" jdbcType="DECIMAL" property="firstYearPremium" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from final_project_master
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.centerm.baseproject.domain.FinalProjectMaster">
+
+    insert into final_project_master (id,holder_name, holder_gender, holder_age,
+      holder_birthday, receiver_name, receiver_gender, 
+      project_id, pay_span, insurance_span, 
+      first_year_premium
+      )
+    values (#{id,jdbcType=VARCHAR},#{holderName,jdbcType=VARCHAR}, #{holderGender,jdbcType=INTEGER}, #{holderAge,jdbcType=INTEGER},
+      #{holderBirthday,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, #{receiverGender,jdbcType=INTEGER}, 
+      #{projectId,jdbcType=INTEGER}, #{paySpan,jdbcType=VARCHAR}, #{insuranceSpan,jdbcType=VARCHAR}, 
+      #{firstYearPremium,jdbcType=DECIMAL}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.centerm.baseproject.domain.FinalProjectMaster">
+    update final_project_master
+    set holder_name = #{holderName,jdbcType=VARCHAR},
+      holder_gender = #{holderGender,jdbcType=INTEGER},
+      holder_age = #{holderAge,jdbcType=INTEGER},
+      holder_birthday = #{holderBirthday,jdbcType=VARCHAR},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_gender = #{receiverGender,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=INTEGER},
+      pay_span = #{paySpan,jdbcType=VARCHAR},
+      insurance_span = #{insuranceSpan,jdbcType=VARCHAR},
+      first_year_premium = #{firstYearPremium,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, holder_name, holder_gender, holder_age, holder_birthday, receiver_name, 
+    receiver_gender, project_id, pay_span, insurance_span, first_year_premium, create_time, 
+    update_time
+    from final_project_master
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, holder_name, holder_gender, holder_age, holder_birthday, receiver_name, 
+    receiver_gender, project_id, pay_span, insurance_span, first_year_premium, create_time, 
+    update_time
+    from final_project_master
+  </select>
+</mapper>

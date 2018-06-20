@@ -1,0 +1,19 @@
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  datasource:
+    url: jdbc:mysql://localhost:3306/base-project?useSSL=false&characterEncoding=UTF-8
+    username: root
+    password: 1123
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  type-aliases-package: com.centerm.baseproject.domain
+  mapper-locations: mapper/*.xml
+logging:
+  level:
+    com.centerm.baseproject.dao: DEBUG
+
+
+#logging.level.com.example.demo.mapper=DEBUG
