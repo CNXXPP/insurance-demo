@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.baseproject.dao.FinalProjectFileMapper">
+  <insert id="insert" parameterType="com.centerm.baseproject.domain.FinalProjectFile">
+    insert into final_project_file(final_project_id,voice_file_path) values (#{pojo.finalProjectId},#{pojo.voiceFilePath})
+  </insert>
+</mapper>

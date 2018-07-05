@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.centerm.baseproject.dao.*;
 import com.centerm.baseproject.domain.*;
 import com.centerm.baseproject.dto.*;
+import com.centerm.baseproject.enums.FinalProjectEnum;
 import com.centerm.baseproject.service.InsuranceProjectService;
 import com.centerm.exception.MyRuntimeException;
 import org.springframework.beans.BeanUtils;
@@ -39,6 +40,9 @@ public class InsuranceProjectServiceImpl implements InsuranceProjectService {
 
     @Autowired
     private InsuranceResponsibleMapper insuranceResponsibleMapper;
+
+    @Autowired
+    private FinalProjectFileMapper finalProjectFileMapper;
 
     @Override
     public List<ProjectInfo> getAllProject() {
@@ -86,6 +90,7 @@ public class InsuranceProjectServiceImpl implements InsuranceProjectService {
     public ProjectInfo getProjectByProjectId(Integer projectId) {
         //获取主计划
         InsuranceProjectMaster projectMaster = insuranceProjectMasterMapper.selectByProjectId(projectId);
+        if (projectMaster == null) {throw new MyRuntimeException(FinalProjectEnum.RECORD_NOT_EXIST);}
         ProjectInfo projectInfo = new ProjectInfo();
         BeanUtils.copyProperties(projectMaster,projectInfo);
         //获取详情
@@ -138,15 +143,15 @@ public class InsuranceProjectServiceImpl implements InsuranceProjectService {
     public String FinalProjectSave(FinalProjectInfo finalProjectInfo) {
         FinalProjectMaster finalProjectMaster = new FinalProjectMaster();
         BeanUtils.copyProperties(finalProjectInfo,finalProjectMaster);
-        String uuid = UUID.randomUUID().toString();
+        String uuid = UUID.randomUUID().toString(); //主保险计划主键
         finalProjectMaster.setId(uuid);
-        int insert = finalProjectMasterMapper.insert(finalProjectMaster);
+        int insert = finalProjectMasterMapper.insert(finalProjectMaster);//插入主保险计划
         List<FinalProjectDetailInfo> finalProjectDetailInfoList = finalProjectInfo.getFinalProjectDetailInfoList();
         finalProjectDetailInfoList.forEach(e->{
             FinalProjectDetail finalProjectDetail = new FinalProjectDetail();
             BeanUtils.copyProperties(e,finalProjectDetail);
             finalProjectDetail.setMasterProjectId(uuid);
-            finalProjectDetailMapper.insert(finalProjectDetail);
+            finalProjectDetailMapper.insert(finalProjectDetail);//插入保险计划详情
         });
         return uuid;
     }
@@ -155,6 +160,9 @@ public class InsuranceProjectServiceImpl implements InsuranceProjectService {
     public FinalProjectInfo getFinalProjectInfoById(String id) {
         FinalProjectMaster finalProjectMaster = finalProjectMasterMapper.selectByPrimaryKey(id);
         List<FinalProjectDetail> finalProjectDetails = finalProjectDetailMapper.selectByInsuranceCode(id);
+        if(finalProjectMaster == null){
+            throw new MyRuntimeException(FinalProjectEnum.RECORD_NOT_EXIST);
+        }
         FinalProjectInfo finalProjectInfo = new FinalProjectInfo();
         BeanUtils.copyProperties(finalProjectMaster,finalProjectInfo);
         //计划险种详情
@@ -183,5 +191,14 @@ public class InsuranceProjectServiceImpl implements InsuranceProjectService {
         }).collect(Collectors.toList()));
         finalProjectInfo.setResponsibleSet(responsibleSet);
         return finalProjectInfo;
+    }
+
+    @Override
+    public int finalProjectFileSave(FinalProjectFile finalProjectFile) {
+        FinalProjectMaster finalProjectMaster = finalProjectMasterMapper.selectByPrimaryKey(finalProjectFile.getFinalProjectId());
+        if(finalProjectMaster == null){
+            throw new MyRuntimeException(FinalProjectEnum.RECORD_NOT_EXIST);
+        }
+        return finalProjectFileMapper.insert(finalProjectFile);
     }
 }

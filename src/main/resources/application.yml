@@ -1,8 +1,27 @@
 spring:
+#出现错误时, 直接抛出异常(便于异常统一处理，否则捕获不到404)
+#  mvc:
+#    throw-exception-if-no-handler-found: false
+  freemarker:
+      request-context-attribute: req  #req访问request
+      suffix: .html  #后缀名
+      content-type: text/html
+      enabled: true
+      cache: false #缓存配置
+      template-loader-path: classpath:/ #模板加载路径 按需配置
+      charset: UTF-8 #编码格式
+      settings:
+        number_format: '0.##'   #数字格式化，无小数点
+#不要为我们工程中的资源文件建立映射
+  resources:
+    add-mappings: true
   redis:
     host: 127.0.0.1
     port: 6379
   datasource:
+#    url: jdbc:mysql://121.199.6.66:3306/insurance_demo?useSSL=false&characterEncoding=UTF-8
+#    username: root
+#    password: centerm
     url: jdbc:mysql://localhost:3306/base-project?useSSL=false&characterEncoding=UTF-8
     username: root
     password: 1123

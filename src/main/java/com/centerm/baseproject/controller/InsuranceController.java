@@ -1,7 +1,9 @@
 package com.centerm.baseproject.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.centerm.baseproject.domain.FinalProjectFile;
 import com.centerm.baseproject.dto.FinalProjectInfo;
+import com.centerm.baseproject.enums.FinalProjectEnum;
 import com.centerm.baseproject.enums.GlobalErrorEnum;
 import com.centerm.baseproject.service.InsuranceProjectService;
 import com.centerm.baseproject.service.impl.InsuranceProjectServiceImpl;
@@ -11,21 +13,24 @@ import com.centerm.dto.common.JSONResponse;
 import com.centerm.exception.MyRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
 @RestController
 @RequestMapping("insurance")
 @Slf4j
-public class InsuranceController extends AbstractAPI{
+public class InsuranceController extends AbstractAPI implements ErrorController  {
 
     @Autowired
     private InsuranceProjectService insuranceProjectService;
@@ -99,5 +104,39 @@ public class InsuranceController extends AbstractAPI{
     @RequestMapping("getFinalProject")
     public JSONResponse getFinalProject(@RequestParam String finalProjectId){
         return success(insuranceProjectService.getFinalProjectInfoById(finalProjectId));
+    }
+
+    /***
+     * 存储文件
+     * @param upfile
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("upload")
+    public  JSONResponse upload(@RequestParam("file") MultipartFile upfile) throws Exception {
+        String originalFilename = upfile.getOriginalFilename();
+        String[] split = originalFilename.split("\\.");
+        if(split.length != 2) {
+            throw new  MyRuntimeException(FinalProjectEnum.FILE_NAME_ERROR);
+        }
+        String newName = split[0] + "_" + System.currentTimeMillis() + "." + split[1];
+        InputStream is = upfile.getInputStream();
+        byte[] b = new byte[is.available()];
+        is.read(b);
+        File dir = new File("D://insurance");
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+        FileOutputStream fos = new FileOutputStream(new File("D://insurance/"+newName));
+        insuranceProjectService.finalProjectFileSave(new FinalProjectFile(split[0],"D://insurance/"+newName));
+        fos.write(b);
+        fos.flush();
+        fos.close();
+        return success();
+    }
+
+    @Override
+    public String getErrorPath() {
+        return null;
     }
 }

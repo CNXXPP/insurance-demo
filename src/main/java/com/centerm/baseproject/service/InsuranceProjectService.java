@@ -1,5 +1,6 @@
 package com.centerm.baseproject.service;
 
+import com.centerm.baseproject.domain.FinalProjectFile;
 import com.centerm.baseproject.domain.InsuranceProjectMaster;
 import com.centerm.baseproject.dto.FinalProjectInfo;
 import com.centerm.baseproject.dto.ProjectInfo;
@@ -21,4 +22,6 @@ public interface InsuranceProjectService {
     String FinalProjectSave(FinalProjectInfo finalProjectInfo);  //生成计划书
 
     FinalProjectInfo getFinalProjectInfoById(String id); //根据id获取最终保险计划书
+
+    int finalProjectFileSave(FinalProjectFile finalProjectFile);
 }

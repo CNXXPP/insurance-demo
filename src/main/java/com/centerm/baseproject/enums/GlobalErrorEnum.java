@@ -13,6 +13,7 @@ public enum GlobalErrorEnum implements ErrorCode {
     UNKNOWN_ERROR(500, "unknown_error"),//未知错误
     NOT_FOUND(404, "not_found"),// 未找到
     TIME_OUT(555, "超时"),// 超时
+    REQUEST_HEADER_ERROR(560,"请求头错误"),
     ;
 
     private int code;

@@ -1,29 +1,29 @@
 Manifest-Version: 1.0
-Class-Path: jul-to-slf4j-1.7.24.jar spring-expression-4.3.7.RELEASE.ja
- r spring-web-4.3.7.RELEASE.jar spring-boot-starter-1.5.2.RELEASE.jar 
- spring-tx-4.3.7.RELEASE.jar spring-core-4.3.7.RELEASE.jar spring-boot
- -starter-jdbc-1.5.2.RELEASE.jar spring-boot-starter-data-redis-1.5.2.
- RELEASE.jar jackson-databind-2.8.7.jar spring-boot-starter-logging-1.
- 5.2.RELEASE.jar spring-boot-starter-web-1.5.2.RELEASE.jar spring-boot
- -autoconfigure-1.5.2.RELEASE.jar spring-data-commons-1.13.1.RELEASE.j
- ar spring-context-support-4.3.7.RELEASE.jar tomcat-embed-core-8.5.11.
- jar commons-V2.1.0.53.jar mysql-connector-java-5.1.41.jar mybatis-spr
- ing-1.3.1.jar spring-boot-1.5.2.RELEASE.jar classmate-1.3.3.jar sprin
- g-webmvc-4.3.7.RELEASE.jar spring-beans-4.3.7.RELEASE.jar logback-cor
- e-1.1.11.jar mybatis-spring-boot-autoconfigure-1.2.0.jar tomcat-jdbc-
- 8.5.11.jar jcl-over-slf4j-1.7.24.jar validation-api-1.1.0.Final.jar p
- oi-3.17.jar lombok-1.16.14.jar logback-classic-1.1.11.jar jackson-ann
- otations-2.8.0.jar spring-jdbc-4.3.7.RELEASE.jar jboss-logging-3.3.0.
- Final.jar mybatis-spring-boot-starter-1.2.0.jar curvesapi-1.04.jar co
- mmons-codec-1.10.jar spring-context-4.3.7.RELEASE.jar tomcat-juli-8.5
- .11.jar commons-pool2-2.4.2.jar jedis-2.9.0.jar spring-boot-starter-t
- omcat-1.5.2.RELEASE.jar poi-ooxml-schemas-3.17.jar mybatis-3.4.2.jar 
- hibernate-validator-5.3.4.Final.jar spring-aop-4.3.7.RELEASE.jar tomc
- at-embed-websocket-8.5.11.jar tomcat-embed-el-8.5.11.jar spring-data-
- redis-1.8.1.RELEASE.jar fastjson-1.2.31.jar log4j-over-slf4j-1.7.24.j
- ar poi-ooxml-3.17.jar spring-data-keyvalue-1.2.1.RELEASE.jar snakeyam
- l-1.17.jar slf4j-api-1.7.24.jar jackson-core-2.8.7.jar xmlbeans-2.6.0
- .jar stax-api-1.0.1.jar spring-oxm-4.3.7.RELEASE.jar commons-collecti
- ons4-4.1.jar
+Class-Path: mysql-connector-java-5.1.41.jar xmlbeans-2.6.0.jar commons
+ -V2.1.0.53.jar hibernate-validator-5.3.4.Final.jar spring-boot-autoco
+ nfigure-1.5.2.RELEASE.jar jboss-logging-3.3.0.Final.jar spring-data-r
+ edis-1.8.1.RELEASE.jar jedis-2.9.0.jar spring-context-4.3.7.RELEASE.j
+ ar lombok-1.16.14.jar jackson-databind-2.8.7.jar jul-to-slf4j-1.7.24.
+ jar spring-beans-4.3.7.RELEASE.jar classmate-1.3.3.jar stax-api-1.0.1
+ .jar tomcat-embed-el-8.5.11.jar poi-ooxml-schemas-3.17.jar tomcat-jdb
+ c-8.5.11.jar mybatis-3.4.2.jar spring-webmvc-4.3.7.RELEASE.jar jackso
+ n-annotations-2.8.0.jar spring-boot-starter-tomcat-1.5.2.RELEASE.jar 
+ spring-data-keyvalue-1.2.1.RELEASE.jar curvesapi-1.04.jar spring-data
+ -commons-1.13.1.RELEASE.jar commons-codec-1.10.jar mybatis-spring-boo
+ t-autoconfigure-1.2.0.jar spring-boot-starter-1.5.2.RELEASE.jar tomca
+ t-embed-core-8.5.11.jar tomcat-juli-8.5.11.jar commons-collections4-4
+ .1.jar mybatis-spring-boot-starter-1.2.0.jar spring-oxm-4.3.7.RELEASE
+ .jar spring-context-support-4.3.7.RELEASE.jar spring-core-4.3.7.RELEA
+ SE.jar spring-web-4.3.7.RELEASE.jar spring-boot-starter-jdbc-1.5.2.RE
+ LEASE.jar poi-ooxml-3.17.jar tomcat-embed-websocket-8.5.11.jar spring
+ -aop-4.3.7.RELEASE.jar commons-pool2-2.4.2.jar log4j-over-slf4j-1.7.2
+ 4.jar freemarker-2.3.26-incubating.jar spring-boot-starter-web-1.5.2.
+ RELEASE.jar slf4j-api-1.7.24.jar spring-boot-starter-data-redis-1.5.2
+ .RELEASE.jar snakeyaml-1.17.jar jcl-over-slf4j-1.7.24.jar jackson-cor
+ e-2.8.7.jar fastjson-1.2.31.jar spring-tx-4.3.7.RELEASE.jar logback-c
+ ore-1.1.11.jar spring-boot-starter-logging-1.5.2.RELEASE.jar spring-e
+ xpression-4.3.7.RELEASE.jar logback-classic-1.1.11.jar mybatis-spring
+ -1.3.1.jar spring-boot-1.5.2.RELEASE.jar validation-api-1.1.0.Final.j
+ ar poi-3.17.jar spring-jdbc-4.3.7.RELEASE.jar
 Main-Class: com.centerm.baseproject.BaseProjectApplication
 
